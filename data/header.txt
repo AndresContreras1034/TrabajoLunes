@@ -1,0 +1,6 @@
+Modos de uso:
+-----------------
+1. Interfaz de usuario
+2. Ingreso manual
+3. Archivo de pruebas
+4. Salir

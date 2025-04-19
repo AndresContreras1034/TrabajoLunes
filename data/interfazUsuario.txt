@@ -1,0 +1,12 @@
+---------------------------
+---       Pizzeria      ---
+---------------------------
+Bienvenido a la pizzeria
+
+Menu principal:
+-----------------
+1. Recibir un pedido.
+2. Atender un pedido.
+3. Despachar un pedido.
+4. Visualizar colas.
+5. Menu anterior.
