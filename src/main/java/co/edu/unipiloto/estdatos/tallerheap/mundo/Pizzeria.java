@@ -7,8 +7,7 @@ public class Pizzeria
 	// ----------------------------------
     // Constantes
     // ----------------------------------
-	
-	/**
+                                	/**
 	 * Constante que define la accion de recibir un pedido
 	 */
 	public final static String RECIBIR_PEDIDO = "RECIBIR";
@@ -32,19 +31,19 @@ public class Pizzeria
 	/**
 	 * Heap que almacena los pedidos recibidos
 	 */
-	// TODO 
+	// Hacer esto
 	/**
 	 * Getter de pedidos recibidos
 	 */
-	// TODO 
+	// Hacer esto
  	/** 
 	 * Cola de elementos por despachar
 	 */
-	// TODO 
+	// Hacer esto
 	/**
 	 * Getter de elementos por despachar
 	 */
-	// TODO 
+	// Hacer esto
 	
 	// ----------------------------------
     // Constructor
@@ -55,7 +54,7 @@ public class Pizzeria
 	 */
 	public Pizzeria()
 	{
-		// TODO 
+	// Hacer esto
 	}
 	
 	// ----------------------------------
@@ -70,7 +69,7 @@ public class Pizzeria
 	 */
 	public void agregarPedido(String nombreAutor, double precio, int cercania)
 	{
-		// TODO 
+	// Hacer esto
 	}
 	
 	// Atender al pedido más importante de la cola
@@ -81,7 +80,7 @@ public class Pizzeria
 	 */
 	public Pedido atenderPedido()
 	{
-		// TODO 
+	// Hacer esto
 		return  null;
 	}
 
@@ -91,7 +90,7 @@ public class Pizzeria
 	 */
 	public Pedido despacharPedido()
 	{
-		// TODO 
+	// Hacer esto
 	    return  null;
 	}
 	
@@ -101,7 +100,7 @@ public class Pizzeria
 	 */
 	 public ArrayList<Pedido> pedidosRecibidosList()
 	 {
-		 // TODO 
+	// Hacer esto
 		 return  null;
 	 }
 	 
@@ -111,7 +110,7 @@ public class Pizzeria
 	  */
 	 public ArrayList<Pedido> colaDespachosList()
 	 {
-		 // TODO 
+	// Hacer esto
 		 return  null;
 	 }
 }

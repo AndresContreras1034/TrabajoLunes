@@ -58,5 +58,5 @@ public class Pedido
 		return cercania;
 	}
 	
-	// TODO 
+	// Hacer esto
 }

@@ -1,0 +1,50 @@
+** Estimación de Complejidad y Análisis del Heap**
+
+*Operaciones del Heap
+
+1. Agregar elemento (insertar)
+   - Complejidad: O(log n)
+   - rta: El elemento se agrega al final del heap y se ajusta su posición hacia arriba usando el método "swim", el cual puede recorrer hasta la raíz del árbol en el peor caso.
+
+2. Retornar el elemento máximo o mínimo
+   - Complejidad: O(1)
+   - rta: El valor máximo (en un max-heap) o mínimo (en un min-heap) siempre está en la raíz, por lo que acceder a él es inmediato.
+
+3. Retirar el elemento máximo o mínimo
+   - Complejidad: O(log n)
+   - rta: Se reemplaza la raíz con el último elemento y se reordena el heap usando el método "sink", que puede recorrer hasta una hoja en el peor caso.
+
+4. Mover el último elemento hacia arriba (swim)
+   - Complejidad: O(log n)
+   - rta: El nuevo elemento puede subir desde una hoja hasta la raíz dependiendo de su valor relativo con respecto a su padre.
+
+5. Mover la raíz hacia abajo (sink)
+   - Complejidad: O(log n)
+   - rta: La raíz puede descender hasta una hoja comparándose con sus hijos para mantener la propiedad del heap.
+
+---
+
+** Heapsort - Pedidos por Precio y Cercanía
+
+ Ordenar pedidos por precio (Max-Heap)
+- Funcionamiento:
+  - Se insertan los pedidos en un max-heap usando el precio como prioridad.
+  - Luego, se extrae el pedido con mayor precio uno por uno.
+- Complejidad:
+  - Inserciones: O(n log n)
+  - Extracciones: O(n log n)
+  - Total: O(n log n)
+
+### Ordenar pedidos por cercanía (Min-Heap)
+- Funcionamiento:
+  - Los pedidos atendidos se insertan en un min-heap según su cercanía (1 a 5).
+  - Luego se extraen desde el más cercano al más lejano.
+- Complejidad:
+  - Inserciones: O(n log n)
+  - Extracciones: O(n log n)
+  - Total: O(n log n)
+
+
+Ambas estructuras permiten manejar eficientemente las prioridades del negocio:
+- Max-Heap permite maximizar ganancias atendiendo primero los pedidos más costosos.
+- Min-Heap permite despachar primero los pedidos más cercanos, minimizando tiempos de entrega.
