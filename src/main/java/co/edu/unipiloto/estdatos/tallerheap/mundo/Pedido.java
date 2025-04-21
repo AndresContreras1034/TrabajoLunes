@@ -30,6 +30,11 @@ public class Pedido
 	 * Constructor del pedido
 	 * TODO Defina el constructor de la clase
 	 */
+	public Pedido(String autorPedido, double precio, int cercania) {
+		this.autorPedido = autorPedido;
+		this.precio = precio;
+		this.cercania = cercania;
+	}
 	
 	// ----------------------------------
 	// Métodos
@@ -59,4 +64,16 @@ public class Pedido
 	}
 	
 	// Hacer esto
+	
+	/**
+	 * Representación textual del pedido
+	 */
+	@Override
+	public String toString() {
+		return "Pedido{" +
+				"autor='" + autorPedido + '\'' +
+				", precio=" + precio +
+				", cercania=" + cercania +
+				'}';
+	}
 }

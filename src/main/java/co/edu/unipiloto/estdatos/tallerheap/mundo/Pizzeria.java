@@ -1,13 +1,15 @@
 package co.edu.unipiloto.estdatos.tallerheap.mundo;
-import java.util.ArrayList;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 
 public class Pizzeria 
-{	
+{   
 	// ----------------------------------
     // Constantes
     // ----------------------------------
-                                	/**
+                                	
+	/**
 	 * Constante que define la accion de recibir un pedido
 	 */
 	public final static String RECIBIR_PEDIDO = "RECIBIR";
@@ -31,30 +33,47 @@ public class Pizzeria
 	/**
 	 * Heap que almacena los pedidos recibidos
 	 */
-	// Hacer esto
+	private Heap<Pedido> pedidosRecibidos;
+	
 	/**
 	 * Getter de pedidos recibidos
 	 */
-	// Hacer esto
- 	/** 
+	public Heap<Pedido> getPedidosRecibidos() {
+		return pedidosRecibidos;
+	}
+
+	/** 
 	 * Cola de elementos por despachar
 	 */
-	// Hacer esto
+	private ArrayList<Pedido> colaDespachos;
+	
 	/**
 	 * Getter de elementos por despachar
 	 */
-	// Hacer esto
+	public ArrayList<Pedido> getColaDespachos() {
+		return colaDespachos;
+	}
 	
 	// ----------------------------------
     // Constructor
     // ----------------------------------
 
 	/**
-	 * Constructor de la case Pizzeria
+	 * Constructor de la clase Pizzeria
 	 */
 	public Pizzeria()
 	{
-	// Hacer esto
+		// Comparador por cercanía primero, luego precio
+		pedidosRecibidos = new Heap<>(new Comparator<Pedido>() {
+			public int compare(Pedido p1, Pedido p2) {
+				if (p1.getCercania() == p2.getCercania()) {
+					return Double.compare(p2.getPrecio(), p1.getPrecio());
+				} else {
+					return Integer.compare(p2.getCercania(), p1.getCercania());
+				}
+			}
+		});
+		colaDespachos = new ArrayList<>();
 	}
 	
 	// ----------------------------------
@@ -69,7 +88,8 @@ public class Pizzeria
 	 */
 	public void agregarPedido(String nombreAutor, double precio, int cercania)
 	{
-	// Hacer esto
+		Pedido nuevo = new Pedido(nombreAutor, precio, cercania);
+		pedidosRecibidos.agregar(nuevo);
 	}
 	
 	// Atender al pedido más importante de la cola
@@ -80,8 +100,11 @@ public class Pizzeria
 	 */
 	public Pedido atenderPedido()
 	{
-	// Hacer esto
-		return  null;
+		Pedido p = pedidosRecibidos.retirar();
+		if (p != null) {
+			colaDespachos.add(p);
+		}
+		return p;
 	}
 
 	/**
@@ -90,8 +113,10 @@ public class Pizzeria
 	 */
 	public Pedido despacharPedido()
 	{
-	// Hacer esto
-	    return  null;
+		if (!colaDespachos.isEmpty()) {
+			return colaDespachos.remove(0);
+		}
+		return null;
 	}
 	
 	/**
@@ -100,8 +125,7 @@ public class Pizzeria
 	 */
 	 public ArrayList<Pedido> pedidosRecibidosList()
 	 {
-	// Hacer esto
-		 return  null;
+		 return pedidosRecibidos.aLista();
 	 }
 	 
 	 /**
@@ -110,7 +134,6 @@ public class Pizzeria
 	  */
 	 public ArrayList<Pedido> colaDespachosList()
 	 {
-	// Hacer esto
-		 return  null;
+		 return new ArrayList<>(colaDespachos);
 	 }
 }
