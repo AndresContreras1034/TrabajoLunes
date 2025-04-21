@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 public class Pizzeria 
-{   
+{	
 	// ----------------------------------
     // Constantes
     // ----------------------------------
-                                	
+	
 	/**
 	 * Constante que define la accion de recibir un pedido
 	 */
@@ -33,8 +33,9 @@ public class Pizzeria
 	/**
 	 * Heap que almacena los pedidos recibidos
 	 */
+	// Usamos un max-heap para los pedidos recibidos (por precio)
 	private Heap<Pedido> pedidosRecibidos;
-	
+
 	/**
 	 * Getter de pedidos recibidos
 	 */
@@ -42,16 +43,16 @@ public class Pizzeria
 		return pedidosRecibidos;
 	}
 
-	/** 
-	 * Cola de elementos por despachar
+ 	/** 
+	 * Cola de elementos por despachar (por cercanía)
 	 */
-	private ArrayList<Pedido> colaDespachos;
-	
+	private Heap<Pedido> colaDespachos;
+
 	/**
 	 * Getter de elementos por despachar
 	 */
 	public ArrayList<Pedido> getColaDespachos() {
-		return colaDespachos;
+		return colaDespachos.aLista();
 	}
 	
 	// ----------------------------------
@@ -63,17 +64,21 @@ public class Pizzeria
 	 */
 	public Pizzeria()
 	{
-		// Comparador por cercanía primero, luego precio
-		pedidosRecibidos = new Heap<>(new Comparator<Pedido>() {
-			public int compare(Pedido p1, Pedido p2) {
-				if (p1.getCercania() == p2.getCercania()) {
-					return Double.compare(p2.getPrecio(), p1.getPrecio());
-				} else {
-					return Integer.compare(p2.getCercania(), p1.getCercania());
-				}
-			}
-		});
-		colaDespachos = new ArrayList<>();
+		// Max-heap para los pedidos recibidos (ordenados por precio)
+        pedidosRecibidos = new Heap<>(new Comparator<Pedido>() {
+            public int compare(Pedido p1, Pedido p2) {
+                // Comparación por precio (de mayor a menor)
+                return Double.compare(p2.getPrecio(), p1.getPrecio()); // Mayor precio primero
+            }
+        });
+
+		// Min-heap para los pedidos por despachar (ordenados por cercanía)
+        colaDespachos = new Heap<>(new Comparator<Pedido>() {
+            public int compare(Pedido p1, Pedido p2) {
+                // Comparación por cercanía (de menor a mayor)
+                return Integer.compare(p1.getCercania(), p2.getCercania()); // Menor cercanía primero
+            }
+        });
 	}
 	
 	// ----------------------------------
@@ -84,7 +89,7 @@ public class Pizzeria
 	 * Agrega un pedido a la cola de prioridad de pedidos recibidos
 	 * @param nombreAutor nombre del autor del pedido
 	 * @param precio precio del pedido 
-	 * @param cercania cercania del autor del pedido 
+	 * @param cercania cercanía del autor del pedido 
 	 */
 	public void agregarPedido(String nombreAutor, double precio, int cercania)
 	{
@@ -92,36 +97,33 @@ public class Pizzeria
 		pedidosRecibidos.agregar(nuevo);
 	}
 	
-	// Atender al pedido más importante de la cola
-	
 	/**
-	 * Retorna el proximo pedido en la cola de prioridad o null si no existe.
-	 * @return p El pedido proximo en la cola de prioridad
+	 * Atender al pedido más importante de la cola
+	 * Retorna el siguiente pedido en la cola de prioridad, o null si no existe.
+	 * @return El pedido próximo en la cola de prioridad
 	 */
 	public Pedido atenderPedido()
 	{
 		Pedido p = pedidosRecibidos.retirar();
 		if (p != null) {
-			colaDespachos.add(p);
+			// Mover el pedido a la cola de despachos
+			colaDespachos.agregar(p);
 		}
 		return p;
 	}
 
 	/**
-	 * Despacha al pedido proximo a ser despachado. 
-	 * @return Pedido proximo pedido a despachar
+	 * Despacha al próximo pedido en la cola de despachos.
+	 * @return El próximo pedido a despachar
 	 */
 	public Pedido despacharPedido()
 	{
-		if (!colaDespachos.isEmpty()) {
-			return colaDespachos.remove(0);
-		}
-		return null;
+		return colaDespachos.retirar();
 	}
 	
 	/**
-	 * Retorna la cola de prioridad de pedidos recibidos como una lista. 
-	 * @return list lista de pedidos recibidos.
+	 * Retorna la cola de prioridad de pedidos recibidos como una lista.
+	 * @return lista de pedidos recibidos
 	 */
 	 public ArrayList<Pedido> pedidosRecibidosList()
 	 {
@@ -129,11 +131,11 @@ public class Pizzeria
 	 }
 	 
 	 /**
-	  * Retorna la cola de prioridad de despachos como una lista. 
-	  * @return list cola de prioridad de despachos.
+	  * Retorna la cola de prioridad de despachos como una lista.
+	  * @return lista de despachos
 	  */
 	 public ArrayList<Pedido> colaDespachosList()
 	 {
-		 return new ArrayList<>(colaDespachos);
+		 return colaDespachos.aLista();
 	 }
 }
